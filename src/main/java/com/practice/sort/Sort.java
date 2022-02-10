@@ -7,7 +7,8 @@ public class Sort {
     public static void main(String[] args) {
         int[] ints = new int[]{0, 5, 6, 1, 2, 3, 4};
 //        bubbleSort(ints);
-        selectionSort(ints);
+//        selectionSort(ints);
+        insertionSort(ints);
         Arrays.stream(ints).asLongStream().forEach(value -> System.out.print(value));
     }
 
@@ -34,6 +35,21 @@ public class Sort {
             }
             numbers[i] = numbers[minIndex];
             numbers[minIndex] = tmp;
+        }
+    }
+
+    public static void insertionSort(int[] numbers){
+
+        int n = numbers.length;
+        for (int i = 1; i < n; ++i) {
+            int key = numbers[i];
+            int j = i - 1;
+
+            while (j >= 0 && numbers[j] > key) {
+                numbers[j + 1] = numbers[j];
+                j--;
+            }
+            numbers[j + 1] = key;
         }
     }
 }
