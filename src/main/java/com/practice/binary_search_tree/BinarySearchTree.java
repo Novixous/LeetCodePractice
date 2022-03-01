@@ -61,28 +61,73 @@ public class BinarySearchTree<T extends Comparable<T>> {
         while (queue.size() > 0) {
             currentNode = queue.poll();
             result.add(currentNode.getValue());
-            if(currentNode.getLeft() != null){
+            if (currentNode.getLeft() != null) {
                 queue.add(currentNode.getLeft());
             }
-            if(currentNode.getRight() != null){
+            if (currentNode.getRight() != null) {
                 queue.add(currentNode.getRight());
             }
         }
         return result;
     }
 
-    public List<T> breathFirstSearchRec(Queue<Node<T>> queue, List<T> list){
-        if(queue.size() == 0){
+    public List<T> breathFirstSearchRec(Queue<Node<T>> queue, List<T> list) {
+        if (queue.size() == 0) {
             return list;
         }
         Node<T> currentNode = queue.poll();
         list.add(currentNode.getValue());
-        if(currentNode.getLeft() != null){
+        if (currentNode.getLeft() != null) {
             queue.add(currentNode.getLeft());
         }
-        if(currentNode.getRight() != null){
+        if (currentNode.getRight() != null) {
             queue.add(currentNode.getRight());
         }
         return breathFirstSearchRec(queue, list);
+    }
+
+    public List<T> DFSInOrder() {
+        return traverseInOrder(root, new ArrayList<>());
+    }
+
+    private List<T> traverseInOrder(Node<T> node, List<T> list) {
+        if (node.getLeft() != null) {
+            traverseInOrder(node.getLeft(), list);
+        }
+        list.add(node.getValue());
+        if (node.getRight() != null) {
+            traverseInOrder(node.getRight(), list);
+        }
+        return list;
+    }
+
+    public List<T> DFSPreOrder() {
+        return traversePreorder(root, new ArrayList<>());
+    }
+
+    private List<T> traversePreorder(Node<T> node, List<T> list) {
+        list.add(node.getValue());
+        if(node.getLeft() != null){
+            traversePreorder(node.getLeft(), list);
+        }
+        if(node.getRight() != null){
+            traversePreorder(node.getRight(), list);
+        }
+        return list;
+    }
+
+    public List<T> DFSPostOrder() {
+        return traversePostOrder(root, new ArrayList<>());
+    }
+
+    private List<T> traversePostOrder(Node<T> node, List<T> list) {
+        if(node.getLeft() != null){
+            traversePostOrder(node.getLeft(), list);
+        }
+        if(node.getRight() != null){
+            traversePostOrder(node.getRight(), list);
+        }
+        list.add(node.getValue());
+        return list;
     }
 }

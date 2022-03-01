@@ -20,6 +20,12 @@ public class BFSMain {
         System.out.println(result.stream().map(integer -> integer.toString()).collect(Collectors.joining(", ")));
         result = tree.breathFirstSearchRec(new LinkedList<>(Collections.singletonList(tree.getRoot())), new ArrayList<>());
         System.out.println(result.stream().map(integer -> integer.toString()).collect(Collectors.joining(", ")));
+        result = tree.DFSInOrder();
+        System.out.println(result.stream().map(integer -> integer.toString()).collect(Collectors.joining(", ")));
+        result = tree.DFSPreOrder();
+        System.out.println(result.stream().map(integer -> integer.toString()).collect(Collectors.joining(", ")));
+        result = tree.DFSPostOrder();
+        System.out.println(result.stream().map(integer -> integer.toString()).collect(Collectors.joining(", ")));
     }
 
 }
