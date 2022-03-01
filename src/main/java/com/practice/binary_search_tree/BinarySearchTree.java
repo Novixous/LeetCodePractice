@@ -2,6 +2,11 @@ package com.practice.binary_search_tree;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 public class BinarySearchTree<T extends Comparable<T>> {
     private Node<T> root;
 
@@ -42,5 +47,42 @@ public class BinarySearchTree<T extends Comparable<T>> {
     String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this.root);
+    }
+
+    public Node<T> getRoot() {
+        return this.root;
+    }
+
+    public List<T> breathFirstSearch() {
+        Node<T> currentNode = root;
+        List<T> result = new ArrayList<>();
+        Queue<Node<T>> queue = new LinkedList<>();
+        queue.add(currentNode);
+        while (queue.size() > 0) {
+            currentNode = queue.poll();
+            result.add(currentNode.getValue());
+            if(currentNode.getLeft() != null){
+                queue.add(currentNode.getLeft());
+            }
+            if(currentNode.getRight() != null){
+                queue.add(currentNode.getRight());
+            }
+        }
+        return result;
+    }
+
+    public List<T> breathFirstSearchRec(Queue<Node<T>> queue, List<T> list){
+        if(queue.size() == 0){
+            return list;
+        }
+        Node<T> currentNode = queue.poll();
+        list.add(currentNode.getValue());
+        if(currentNode.getLeft() != null){
+            queue.add(currentNode.getLeft());
+        }
+        if(currentNode.getRight() != null){
+            queue.add(currentNode.getRight());
+        }
+        return breathFirstSearchRec(queue, list);
     }
 }
